@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+[user]
+	name = bonet
+	email = bonetti.mrc@gmail.com
+# Please adapt and uncomment the following lines:
+#	name = bonet
+#	email = bonetti.mrc@gmail.com
+[core]
+	editor = vim
