@@ -1,0 +1,25 @@
+#!/bin/bash
+
+mute="$(pactl get-sink-mute @DEFAULT_SINK@)"
+
+if [ "$mute" == "Mute: yes" ] 
+then
+	echo "🔇"
+	exit
+fi
+
+volume="$(pactl get-sink-volume @DEFAULT_SINK@ |
+	grep -m 1 --only-matching --extended-regexp [0-9]+% |
+	head --lines=1 |
+	sed 's/\%//')"
+
+case 1 in
+	$((volume >= 500)) ) icon="💀" ;;
+	$((volume >= 150)) ) icon="💥" ;;
+	$((volume >= 70)) ) icon="🔊" ;;
+	$((volume >= 30)) ) icon="🔉" ;;
+	$((volume >= 1)) ) icon="🔈" ;;
+	* ) icon="🔇";;
+esac
+
+echo "$icon$volume%"
